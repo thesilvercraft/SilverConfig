@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace SilverConfig
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class CommentAttribute : Attribute
+    public sealed class CommentAttribute : Attribute
     {
-        public string Description;
-        public bool InsideOfObject;
+        public string Description { get; }
+        public bool InsideOfObject { get; }
 
-        public CommentAttribute(string des, bool inside = false)
+        public CommentAttribute(string description, bool insideOfObject = false)
         {
-            Description = des;
-            InsideOfObject = inside;
+            Description = description;
+            InsideOfObject = insideOfObject;
         }
     }
 }
