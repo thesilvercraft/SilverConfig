@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release</Configurations>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>SilverDiamond</Authors>
     <Company>SilverCraft</Company>
     <RepositoryUrl>https://github.com/thesilvercraft/SilverConfig</RepositoryUrl>

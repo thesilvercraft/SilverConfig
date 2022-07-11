@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SilverConfig
@@ -19,7 +20,8 @@ namespace SilverConfig
         public virtual T? Read(string path)
         {
             using var streamWriter = new StreamReader(path);
-            return (T?)serializer.Deserialize(streamWriter);
+            using var xmlReader = XmlReader.Create(streamWriter);
+            return (T?)serializer.Deserialize(xmlReader);
         }
 
         public virtual bool SupportsComments()

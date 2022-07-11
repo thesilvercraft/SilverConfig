@@ -24,7 +24,8 @@ namespace SilverConfig
                 throw new FileNotFoundException();
             }
             using var streamWriter = new StreamReader(path);
-            return (T?)serializer.Deserialize(streamWriter);
+            using var xmlReader = XmlReader.Create(streamWriter);
+            return (T?)serializer.Deserialize(xmlReader);
         }
 
         public virtual bool SupportsComments()

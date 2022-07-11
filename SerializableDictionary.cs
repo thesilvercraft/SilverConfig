@@ -5,6 +5,12 @@ using System.Xml.Serialization;
 
 namespace SilverConfig;
 
+// https://weblogs.asp.net/pwelter34/444961
+/// <summary>
+/// A serializable dictionary for XML object
+/// </summary>
+/// <typeparam name="TKey">The key type of the dictionary</typeparam>
+/// <typeparam name="TValue">The value type of the dictionary</typeparam>
 [XmlRoot("dictionary")]
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable where TKey : notnull
 {
@@ -17,6 +23,10 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IX
 
     public void ReadXml(XmlReader reader)
     {
+        if (reader is null)
+        {
+            throw new ArgumentNullException(nameof(reader));
+        }
         XmlSerializer keySerializer = new(typeof(TKey));
         XmlSerializer valueSerializer = new(typeof(TValue));
         var wasEmpty = reader.IsEmptyElement;
@@ -45,6 +55,10 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IX
 
     public void WriteXml(XmlWriter writer)
     {
+        if (writer is null)
+        {
+            throw new ArgumentNullException(nameof(writer));
+        }
         XmlSerializer keySerializer = new(typeof(TKey));
         XmlSerializer valueSerializer = new(typeof(TValue));
         foreach (var key in Keys)
