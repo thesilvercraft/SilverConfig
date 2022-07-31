@@ -18,7 +18,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IX
 
     public XmlSchema GetSchema()
     {
-        return null;
+        return null!;
     }
 
     public void ReadXml(XmlReader reader)
@@ -76,4 +76,37 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IX
     }
 
     #endregion IXmlSerializable Members
+
+    public override bool Equals(object? obj)
+    {
+        if (object.ReferenceEquals(this, obj))
+            return true;
+        if (obj is null)
+        {
+            return false;
+        }
+        if (obj.GetType() != this.GetType())
+        {
+            return false;
+        }
+        if (obj is not SerializableDictionary<TKey, TValue> a)
+        {
+            return false;
+        }
+        foreach (var key in Keys)
+        {
+            if (a.ContainsKey(key))
+            {
+                if (a[key]?.Equals(this[key]) == false)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

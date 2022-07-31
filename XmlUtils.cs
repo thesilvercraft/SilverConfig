@@ -101,6 +101,10 @@ namespace SilverConfig
         /// <returns>A <see cref="XmlDocument"/> that has the comment before the xpath thingy</returns>
         public static XmlDocument CommentBeforeObject(XmlDocument inputdoc, string xpath, string comment)
         {
+            if (inputdoc is null)
+            {
+                throw new ArgumentNullException(nameof(inputdoc));
+            }
             var elementToComment = inputdoc.SelectSingleNode(xpath);
             var commentNode = inputdoc.CreateComment(comment);
             var parentNode = elementToComment?.ParentNode;
